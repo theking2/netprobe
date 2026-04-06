@@ -583,7 +583,7 @@
       </div>
       <div class="port-options">
         <span class="port-options label">Ports:</span>
-        <button class="btn-chip active" data-preset="common">Common (20)</button>
+        <button class="btn-chip active" data-preset="common">Common (20+)</button>
         <button class="btn-chip" data-preset="custom">Custom:</button>
         <input type="text" class="input-wrap port-custom" id="ports-custom" placeholder="80,443,8080,…" style="display:none">
       </div>
@@ -832,6 +832,7 @@ async function runEmail() {
         ${checkRow(c.mx_ok, 'MX Records', mxRows)}
         ${checkRow(c.spf_ok, 'SPF Record', c.spf_record ? `<div class="check-detail highlight">${escHtml(c.spf_record)}</div>` : '<div class="check-detail">Missing — email may be marked as spam</div>', !c.spf_ok ? 'warn' : null)}
         ${checkRow(c.dmarc_ok, 'DMARC Record', c.dmarc_record ? `<div class="check-detail highlight">${escHtml(c.dmarc_record)}</div>` : '<div class="check-detail">Missing — no DMARC policy found</div>', !c.dmarc_ok ? 'warn' : null)}
+        ${checkRow(c.dkim_ok, 'DKIM Record', c.dkim_record ? `<div class="check-detail highlight">${escHtml(c.dkim_record)}</div>` : '<div class="check-detail">Missing — no DKIM policy found</div>', !c.dkim_ok ? 'warn' : null)}
       </div>`;
 
     // Port section

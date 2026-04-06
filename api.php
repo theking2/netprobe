@@ -254,6 +254,18 @@ function doEmailCheck($host) {
     $checks['dmarc_record'] = $dmarc;
     $checks['dmarc_ok'] = $dmarc !== null;
 
+	// DKIM Record
+    $dkim = null;
+    $dkimRecords = dns_get_record('default._domainkey.' . $host, DNS_TXT);
+    foreach ($dkimRecords ?: [] as $rec) {
+        if (isset($rec['txt']) && str_starts_with($rec['txt'], 'v=DKIM1')) {
+            $dkim = $rec['txt'];
+            break;
+        }
+    }
+    $checks['dkim_record'] = $dkim;
+    $checks['dkim_ok'] = $dkim !== null;
+
     // Test primary MX host for email ports
     $testHost = !empty($mxRecords) ? $mxRecords[0]['host'] : $host;
     $checks['tested_mail_host'] = $testHost;
