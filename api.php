@@ -127,7 +127,7 @@ function doSpeedTest($host) {
     // Ping-style ICMP via exec (may be blocked on shared hosts)
     $pingMs = null;
     $pingOutput = [];
-    @exec("ping -c 3 -W 2 " . escapeshellarg($host) . " 2>&1", $pingOutput, $ret);
+    @exec("ping -c 10 -W 2000 " . escapeshellarg($host) . " 2>&1", $pingOutput, $ret);
     if ($ret === 0) {
         foreach ($pingOutput as $line) {
             if (preg_match('/avg\s*=\s*[\d.]+\/([\d.]+)/', $line, $m)) {
